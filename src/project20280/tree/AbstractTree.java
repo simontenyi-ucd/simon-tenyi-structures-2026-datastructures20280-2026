@@ -128,7 +128,7 @@ public abstract class AbstractTree<E> implements Tree<E> {
     /**
      * Returns the height of the subtree rooted at Position p.
      *
-     * @param p A valid Position within the tree
+     //* @param p A valid Position within the tree
      * @throws IllegalArgumentException if p is not a valid Position for this tree.
      */
     public int height() throws IllegalArgumentException {
