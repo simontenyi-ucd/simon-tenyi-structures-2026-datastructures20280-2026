@@ -68,13 +68,15 @@ public abstract class AbstractBinaryTree<E> extends AbstractTree<E>
      * @param snapshot a list to which results are appended
      */
     private void inorderSubtree(Position<E> p, List<Position<E>> snapshot) {
-        Position<E> left = left(p);
-        Position<E> right = right(p);
-        if (left != null)
-            inorderSubtree(left, snapshot);
+//        Position<E> left = left(p);
+//        Position<E> right = right(p);
+        if (left(p) != null){
+            inorderSubtree(left(p), snapshot);
+        }
         snapshot.add(p);
-        if (right != null)
-            inorderSubtree(right, snapshot);
+        if (right(p) != null){
+            inorderSubtree(right(p), snapshot);
+        }
     }
 
     /**
