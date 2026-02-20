@@ -21,8 +21,10 @@ public class SinglyLinkedList<E> implements List<E> {
          * @param e the element to be stored
          * @param n reference to a node that should follow the new node
          */
+
         public Node(E e, Node<E> n) {
-            // TODO
+            element = e;
+            next = n;
         }
 
         // Accessor methods
@@ -33,7 +35,7 @@ public class SinglyLinkedList<E> implements List<E> {
          * @return the element stored at the node
          */
         public E getElement() {
-            return null;
+            return element;
         }
 
         /**
@@ -42,8 +44,8 @@ public class SinglyLinkedList<E> implements List<E> {
          * @return the following node
          */
         public Node<E> getNext() {
-            // TODO
-            return null;
+
+            return next;
         }
 
         // Modifier methods
@@ -54,7 +56,7 @@ public class SinglyLinkedList<E> implements List<E> {
          * @param n the node that should follow this one
          */
         public void setNext(Node<E> n) {
-            // TODO
+            next = n;
         }
     } //----------- end of nested Node class -----------
 
@@ -63,65 +65,117 @@ public class SinglyLinkedList<E> implements List<E> {
      */
     private Node<E> head = null;               // head node of the list (or null if empty)
 
-
     /**
      * Number of nodes in the list
      */
     private int size = 0;                      // number of nodes in the list
 
     public SinglyLinkedList() {
+
     }              // constructs an initially empty list
 
     //@Override
     public int size() {
-        // TODO
-        return 0;
+
+        return size;
     }
 
     //@Override
     public boolean isEmpty() {
-        // TODO
-        return false;
+
+        return size <= 0;
     }
 
     @Override
     public E get(int position) {
-        // TODO
+
+        if (position < 0 || position >= size) {
+            throw new IndexOutOfBoundsException();
+        }
+
+        Node<E> node = head;
+        int i = 0;
+        while (node != null) {
+            if (i == position) {
+                return node.getElement();
+
+            }
+            node = node.getNext();
+            i++;
+        }
         return null;
     }
 
     @Override
     public void add(int position, E e) {
         // TODO
+        if (position < 0 || position > size) {
+            throw new IndexOutOfBoundsException();
+        }
+
+        if (position == 0) {
+            head = new Node<>(e, head);
+            size++;
+            return;
+        }
+        Node<E> node = head;
+        int i = 0;
+        while (node != null && i < position) {
+            node = node.getNext();
+            i++;
+        }
+        if (node == null){
+            return;
+        }
+        Node<E> nextNode = node.getNext();
+        node.setNext(new Node<E>(e, nextNode));
+        size++;
     }
 
 
     @Override
     public void addFirst(E e) {
-        // TODO
+        add(0, e);
     }
 
     @Override
     public void addLast(E e) {
-        // TODO
+        add(size - 1, e);
     }
 
     @Override
     public E remove(int position) {
-        // TODO
-        return null;
+        if (position < 0 || position >= size) {
+            throw new IndexOutOfBoundsException();
+        }
+        Node<E> node = head;
+        int i = 1;
+
+        if(position == 0){
+            head = head.getNext();
+            return node.getElement();
+        }
+        while (node != null && i < position) {
+            node = node.getNext();
+            i++;
+        }
+        if (node == null){
+            return null;
+        }
+        Node<E> deletedNode = node.getNext();
+        node.setNext(deletedNode.getNext());
+        size--;
+        return deletedNode.getElement();
     }
 
     @Override
     public E removeFirst() {
-        // TODO
-        return null;
+        return remove(0);
     }
 
     @Override
     public E removeLast() {
-        // TODO
-        return null;
+        return remove(size - 1);
     }
 
     //@Override

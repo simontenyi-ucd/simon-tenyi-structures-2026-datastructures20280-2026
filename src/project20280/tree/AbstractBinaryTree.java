@@ -51,10 +51,12 @@ public abstract class AbstractBinaryTree<E> extends AbstractTree<E>
     @Override
     public Iterable<Position<E>> children(Position<E> p) {
         List<Position<E>> snapshot = new ArrayList<>(2);    // max capacity of 2
-        if (left(p) != null)
+        if (left(p) != null) {
             snapshot.add(left(p));
-        if (right(p) != null)
+        }
+        if (right(p) != null){
             snapshot.add(right(p));
+        }
         return snapshot;
     }
 
@@ -66,7 +68,13 @@ public abstract class AbstractBinaryTree<E> extends AbstractTree<E>
      * @param snapshot a list to which results are appended
      */
     private void inorderSubtree(Position<E> p, List<Position<E>> snapshot) {
-        // TODO
+        Position<E> left = left(p);
+        Position<E> right = right(p);
+        if (left != null)
+            inorderSubtree(left, snapshot);
+        snapshot.add(p);
+        if (right != null)
+            inorderSubtree(right, snapshot);
     }
 
     /**

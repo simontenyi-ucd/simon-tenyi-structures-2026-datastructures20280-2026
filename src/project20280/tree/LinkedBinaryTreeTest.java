@@ -5,6 +5,7 @@ import project20280.interfaces.Position;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+
 class LinkedBinaryTreeTest {
 
     @Test
